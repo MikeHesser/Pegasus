@@ -1,89 +1,89 @@
-
 # PEGASUS Assembler/Editor
 written in 1987/88 by Mike Hesser for CPC 464/664/6128
 
-Ziemlich genau ein Jahr lang dauerte die Entwicklung meines größten Projektes auf dem CPC: Ein in Assembler geschriebener Assembler.
+It took me almost exactly one year to develop my biggest project on the CPC: An assembler written in assembler.
 
-Ein Assembler wandelt Befehle der Assemblersprache (in diesem Fall des Z80-Prozessors) in Maschinencode.
-Als Entwicklungswerkzeug diente ein in BASIC geschriebener Assembler. Als das Projekt genügend gereift war, konnte der Assembler seinen eignen Code assemblieren und ausführen.
-Die Entwicklungsbedingungen waren ziemlich widrig. Der CPC464 hatte ja nur das Kassettenlaufwerk und war dementsprechend langsam.
-Fehler im Programmcode führten schnell zu Abstürzen. Hat man nicht vorher abgespeichert (was eine Zeit lang dauerte) war der geschriebene Code weg.
+An assembler converts instructions of the assembly language (in this case of the Z80 processor) into machine code.
+The development tool was an assembler written in BASIC. When the project matured sufficiently, the assembler could assemble and run its own code.
+The development conditions were quite adverse. My Amstrad CPC 464 had only the cassette drive and was accordingly slow.
+Errors in the program code quickly led to crashes. If you didn't save before (which took some time) the written code was gone.
 
-An diesem Projekt habe ich viel gelernt, vor allem dass man auch mit wenig Code effiziente und schnelle Programme schreiben kann.
+I learned a lot from this project, especially that you can write efficient and fast programs with little code.
 
-## Bedienungsanleitung
+## User manual
 
-Pegasus ist ein 2-Pass Assembler mit folgenden Leistungsmerkmalen:
+Pegasus is a 2-pass assembler with the following features:
 
 * Full Screen Editor
-* Automatischen Einrücken und Formatieren der eingegebenen Befehle
-* Umwandlung der Befehle in Tokens, dadurch Platzeinsparung
-* kann Sourcecode für circa 7 Kbyte Maschinencode im Speicher halten!
-* sehr schneller Assembler (6 KByte in 13 sec.)
-* Erzeugt Code fuer jede beliebige Speicheradresse
-* einfache Integerarithmetik
-* Starten der erzeugten Programme von Pegasus aus und Registeranzeige per Pseudobefehl `BRK`
+* Automatic indentation and formatting of the entered commands
+* Converts commands to tokens, thus saving space
+* can hold source code for about 7 Kbytes of machine code in memory!
+* very fast assembler (6 KByte in 13 sec.)
+* generates code for any memory address
+* simple integer arithmetic
+* Start generated programs from Pegasus and display registers by pseudo command 'BRK
 
 
-### Der Editor
+### The Editor
 
-Hier handelt es sich um einen Full Screen Editor der ohne Zeilennummern arbeitet. Aus Geschwindigkeitsgründen wurde auf eine Statuszeile verzichtet, so daß das Scrolling schnell von statten geht.
-Die sonstigen, von Basic bekannten Funktionen wie DEL, werden hier nicht erwähnt.
+This is a full screen editor that works without line numbers. For speed reasons a status line was omitted, so that scrolling is fast.
+The other functions known from Basic, like DEL, are not mentioned here.
 
-Anmerkung: Die folgenden Funktionen werden nicht ausgeführt, wenn PEGASUS auf einen Syntaxfehler in der eingegebenen Zeile gestoßen oder das angegebene Label schon im Quelltext vorgekommen ist.
+Note: The following functions will not be executed if PEGASUS encounters a syntax error in the line entered or if the specified label has already occurred in the source code.
 
 
-Hier die Editorfunktionen:
+Here are the editor functions:
 
-| Tastenkombination    | Funktion      |
+| key combination | function |
 | -------------------- | ------------- |
-| `CTRL + <links>`  | Setzt den Cursor an den Anfang der Zeile       |
-| `CTRL + <rechts>` | Setzt den Cursor an das Ende der Zeile |
-| `CTRL + <oben>`   | Der Cursor geht an den Anfang des Quelltextes            |
-| `CTRL + <unten>`  | befördert den Cursor an das Ende des Quelltextes            |
-| `CTRL + F`           | Sprung zu einem Label: Nach Eingabe des gesuchten Labels wird, sofern im Quelltext vorhanden, der Cursor auf die Zeile des Labels gesetzt.            |
-| `CTRL + C`           | Löscht die Zeile auf Cursorposition. Die nachfolgenden Zeilen werden nachgerückt.           |
-| `COPY`               | Mit dieser Taste können Textbereiche eingegrenzt werden. Dazu steuern Sie den Cursor auf den Anfang des Bereiches und drücken die COPY-Taste was mit einem Tonsignal quittiert wird. Nun wird auf gleiche Weise das Ende markiert. Während des Markierens können keine Änderungen am Quelltext vorgenommen werden! Wollen Sie aus dem Blockmodus zurück in den Editiermodus, muss die ESC-Taste betätigt werden.           |
-| `ENTER`              | Eingabebestätigung der eingegebenen Zeile. Der Befehl wird formatiert auf dem Bildschirm ausgegeben. Der Cursor geht außerdem auf den Anfang der nächsten Zeile. Wollen Sie eine Zeile einfügen, so muß der Cursor an den Anfang der Zeile gesetzt und ENTER gedrückt werden. |
-| `CTRL + K`           | (Kopiere Block). Diese Tastenkombination kopiert den vorher mit der COPY-Taste markierten Block auf die aktuelle Cursorposition. |
-| `CTRL + N`           | Diese Funktion löscht nach einer Sicherheitsabfrage den gesamten Quelltext. Wurde vorher ein Block markiert so wird dieser gelöscht. |
-| `CTRL + ^`           | Mit dieser Option können Sie das assemblierte Programm starten. Zwischen dem Assemblieren und dem Starten des Programms sollten aber keine Änderungen am Quelltext vorgenommen werden, da sonst der Maschinencode überschrieben werden könnte.
-| `CTRL + S`           | Das Programm fragt nach dem Dateinamen und speichert dann den Quelltext. Für Kassettenbenutzer: voreingestellt sind 2000 Baud |
-| `CTRL + L`           | wie oben, nur wird ein Quelltext geladen. Befindet sich schon ein Programm im Speicher, fügt Pegasus es einfach an. Wird bei einer LOAD/SAVE Option kein Dateiname angegeben, gibt Pegasus das Directory aus.| 
-| `CTRL + Q`           | (Quit). Kehrt von Pegasus zurück zu Basic. Die oberste Speicheradresse wird zusätzlich herabgesetzt um den Quelltext zu schützen. Durch Eingabe von `CALL 0` (keine Angst!) gelangen Sie wieder zurück zu Pegasus. |
+| `CTRL + <left>` | Places the cursor at the beginning of the line |
+| `CTRL + <right>` | Places the cursor at the end of the line |
+| `CTRL + <up>` | Moves the cursor to the beginning of the source text |
+| `CTRL + <down>` | Moves the cursor to the end of the source text |
+| `CTRL + F` | Jump to a label: After entering the searched label, the cursor will be placed on the line of the label, if it exists in the source text.            |
+| `CTRL + C` | Deletes the line at cursor position. The following lines are moved up.           |
+| `COPY` | This key can be used to narrow down text areas. To do this, move the cursor to the beginning of the area and press the COPY key, which is acknowledged with a sound signal. Now the end is marked in the same way. During marking, no changes can be made to the source text! If you want to return from the block mode to the editing mode, the ESC key must be pressed.           |
+| 'ENTER' | Input confirmation of the entered line. The command is output formatted on the screen. The cursor also moves to the beginning of the next line. If you want to insert a line, the cursor must be moved to the beginning of the line and ENTER must be pressed. |
+| 'CTRL + K' (Copy block). This key combination copies the block previously marked with the COPY key to the current cursor position. |
+| `CTRL + N` | This function deletes the entire source text after a confirmation prompt. If a block was marked before, it will be deleted. |
+| `CTRL + ^` | With this option you can start the assembled program. However, no changes should be made to the source code between assembling and starting the program, otherwise the machine code could be overwritten.
+| `CTRL + S` | The program asks for the file name and then saves the source code. For cassette users: default is 2000 baud |
+| `CTRL + L` | as above, but a source code is loaded. If there is already a program in memory Pegasus will simply append it. If no filename is specified with a LOAD/SAVE option Pegasus will output the directory.| 
+| `CTRL + Q` | (Quit). Returns from Pegasus back to Basic. The top memory address is additionally lowered to protect the source code. By typing `CALL 0` (don't be afraid!) you get back to Pegasus. |
 
-### DER ASSEMBLERTEIL
+### THE ASSEMBLER PART
 
-Aufgerufen wird er vom Editor mit `CTRL + A`. Der Bildschirm wird gelöscht und folgende Fragen erscheinen der Reihe nach auf dem Bildschirm:</p>
+It is called from the editor with `CTRL + A`. The screen is cleared and the following questions appear on the screen in order:</p>
 
-#### Bildschirmausgabe (j/n)? 
+#### Screen output (y/n)? 
  
-Während des Assemblierens werden die Zeilen mitangezeigt.
-Das Listen der Zeile kann durch ESC angehalten, und durch
-Drücken einer beliebigen Taste fortgesetzt werden. Ein nochmaliges
-Drücken der ESC Taste bricht den Vorgang ab.
+While assembling, the lines are also displayed.
+During the assembling process the lines are also displayed.
+The listing of the line can be stopped by ESC, and continued by
+and continue by pressing any key. Pressing the
+Pressing the ESC key again cancels the process.
 
-#### Drucker (j/n)? 
+#### Printer (y/n)? 
 
-Wie oben, nur zusätzliche Ausgabe auf dem Drucker
+As above, only additional output on the printer
 
-#### MC direkt speichern (j/n)? 
+#### Save MC directly (y/n)? 
 
-Mit dieser Option ist es möglich, für jede beliebige Speicheradresse Maschinencode zu erzeugen. Der Code wird dabei direkt auf den Datenträger geschrieben.
-Allerdings müssen Sie beim Laden des erzeugten Maschinencodes darauf achten, die Ladeadresse mitanzugeben.
+With this option it is possible to generate machine code for any memory address. The code will be written directly to the disk.
+However, when loading the generated machine code you have to make sure to include the load address.
 
-Trifft Pegasus auf einen Fehler im Quelltext, schaltet er sofort in den Editiermodus um und setzt den Cursor auf die fehlerhafte Zeile. Dabei wird am unteren Bildschirmrand die Fehlerart angezeigt.
+If Pegasus encounters an error in the source code, it immediately switches to edit mode and places the cursor on the erroneous line. The error type will be displayed at the bottom of the screen.
 
-Hier die Bedeutungen der einzelnen Meldungen:
+Here are the meanings of the individual messages:
 
-| Fehler    | Beschreibung      |
-| -------------------- | ------------- |
-|`Syntax error`         | Pegasus versteht die Zeile nicht. z.B. gibt es kein `LD HL,DE.`|
-|`Overflow`             | Ein Wert oder das Ergebnis einer Rechenoperation ist zu groß. (z.B. `LD A,500` oder `LD A,200+200`) |
-|`Memory full`         | Es ist nicht mehr genügend Speicherplatz für den Objektcode oder für die Labeltabelle vorhanden |
-|`Distance too high`|Die Distanz zweier Adressen ist für eine relative Adressierung zu groß| 
-|`Out of Memory`    |Die angegebene ORG-Adresse ist über oder unter dem zulässigen Speicherbereich.|
-|`Unknown Label`    |Das Label ist nicht im Quelltext definiert|
+| Error | Description |
+| ------------------ | ------------- |
+|`Syntax error` | Pegasus does not understand the line. e.g. there is no `LD HL,DE.`|
+|`Overflow` | A value or the result of an operation is too large. (e.g. `LD A,500` or `LD A,200+200`) |
+|`Memory full` | Es ist nicht mehr genügend Speicherplatz für den Objektcode oder für die Labeltabelle vorhanden |
+|`Distance too high` | Die Distanz zweier Adressen ist für eine relative Adressierung zu groß| 
+|`Out of Memory` | Die angegebene ORG-Adresse ist über oder unter dem zulässigen Speicherbereich.|
+|`Unknown Label` | Das Label ist nicht im Quelltext definiert|
 
 ## Argumente
 
@@ -92,10 +92,10 @@ Hier die Bedeutungen der einzelnen Meldungen:
 Labels dürfen maximal 6 Zeichen lang sein und müssen mit einem Buchstaben beginnen. Weiterhin muß ein Doppelpunkt angehängt werden.
 Labels können auf folgende Arten definiert werden:
 
-|||
+|Syntax|Beschreibung|
 | -------------------- | ------------- |
 |`<label>: EQU <wert>` | <label> nimmt den Wert <wert> an|
-|`<label>: <Befehl>`   | <label> nimmt den Wert des aktuellen Programcounters (PC) an.|
+|`<label>: <Befehl>` | <label> nimmt den Wert des aktuellen Programcounters (PC) an.|
 
 ### Der Assembler
 
@@ -105,75 +105,73 @@ Bei Hexadzimalzahlen muß ein Doppelkreuz `#` und bei Binärzahlen ein Prozentze
 
 
 z.B.
-|||
-| -------------------- | ------------- |
-|`#ABCD`|Hexadezimal|
-|`%1010`|Binär|
-|`1234`|Dezimal|
+|Wert|Bedeutung|
+| ----- | ------------- |
+|`ABCD` |hexadecimal|
+|`%1010`|Binary|
+|`1234` |Decimal|
 
 #### Strings
 
 
-Wenn Sie zum Beispiel das Register `A` (Akku) mit dem ASCII-WERT von 'A' laden wollen, so geben Sie ein:
+For example, if you want to load the register `A` (accumulator) with the ASCII value of 'A', enter:
 
-`LD A,"A"` oder für 16-Bit: `LD HL,"AB"`
+`LD A, "A"` or for 16-bit: `LD HL, "AB"`.
 
 #### PC
 
-Der Wert des Programmcounters wird durch '$' ausgelesen.
+The value of the program counter is read out by '$'.
 
 `JR $+10`
 
-#### Operatoren
+#### Operators
 
-Die oben genannten Argumente können über die folgenden Operatoren verknüpft werden:
-|||
+The above arguments can be linked using the following operators:
+| operator|function|
 | -------------------- | ------------- |
 |+|Addition|
-|-|Subtraktion|
-|*|Multiplikation|
+|-|Subtraction|
+|*|Multiplication|
 |/|Division|
-|?|OR|
+|OR|
 |&|AND|
 |!|XOR|
 
 
-Bei eventuellen Über- oder Unterläufen verzweigt Pegasus in den Editor. Es gibt keine Klammern und Vorzeichen. Gerechnet wird ohne Berücksichtigung der Rechenhierarchie von links nach rechts.
+In case of possible overflows or underflows Pegasus branches to the editor. There are no brackets and signs. Calculations are done from left to right without consideration of the calculation hierarchy.
 
 
-#### Pseudobefehle
+#### Pseudo commands
 
-|||
+| command|description|
 | -------------------- | ------------- |
-|`ORG <wert>`|Der MC wird ab Adresse <wert> abgelegt. <wert> muss eine Zahl sein. Bei mehreren ORG-Anweisungen im Quelltext wird bei einer eventuellen Aufzeichnung nur ab dem zuletzt angegebenen ORG-Befehl abgespeichert. |
-|`END`|Beendet den Assembliervorgang. Nicht zwingend notwendig.|
-|`DEFB <wert>,...`|Hier können ein oder mehrere durch Komma getrennte Byte-Ausdrücke angegeben werden.|
-|`DEFW <wert>,...`|wie oben, nur Word-Ausdrücke|
-|`DEFM "<text>"`|Der Textstring <text> wird nach der ASCII-Tabelle übersetzt.|
-|`DEFS <wert>`|Es werden <wert> Nullbytes im Programm eingesetzt. `<wert>` muss eine 8-Bit Zahl sein.|
-|`ENT <wert>`|Definiert die Adresse, ab der der Startvorgang des MC vom Editor aus laufen soll. Dieser Befehl sollte in jedem Assemblerprogramm vorhanden sein.|
-|`BRK`|Der Assembler setzt einen Restart-Befehl (RST 6) ins Programm ein. Wird nun das Programm vom Editor aus gestartet und der Prozessor trifft auf den RST 6 so wird der Ablauf gestoppt und die Registerinhalte angezeigt. Ein Tastendruck befördert Sie in den Editor zurück.|
+|`ORG <value>`|The MC is stored from address <value>. <value> must be a number. If there are several ORG instructions in the source code, the MC will only be stored starting from the last ORG instruction specified. |
+|`END`|Ends the assembling process. Not mandatory.|
+|`DEFB <value>,...`|One or more comma-separated byte expressions can be specified here.|
+|`DEFW <value>,...`|as above, only Word expressions|
+|`DEFM "<text>"`|The text string <text> will be translated according to the ASCII table.|
+|`DEFS <value>`|Zero bytes are inserted in the program. `<value>` must be an 8-bit number.|
+|`ENT <value>`|Defines the address from which the startup process of the MC should run from the editor. This command should be present in every assembler program.|
+|`BRK`|The assembler inserts a restart command (RST 6) into the program. If the program is now started from the editor and the processor encounters RST 6, the sequence is stopped and the register contents are displayed. A keystroke transports you back to the editor.|
 
-#### Aufbau einer Assemblerzeile:
+#### Structure of an assembler line:
 
-1. Label, Befehl oder REM
-2. Befehl oder REM
-3. erster Operand
-4. zweiter Operand
-5. REM (Semikolon ;)
-
-
+1. label, command or REM
+2. command or REM
+3. first operand
+4. second operand
+5. REM (semicolon ;)
 
 
-### Pegasus intern
+### Pegasus internal
 
-#### Speicherbelegung
+#### Memory allocation
 
-|||
+| memory area|content|
 | -------------------- | ------------- |
-|#0170 - #02FF|Frei für Basicprogramme|
-|#0300 - #84FF|Speicher für Sourcecode|
-|#8500 - #8EFF|Puffer fuer Disk/Kass I/O|
+|#0170 - #02FF|Free for basic programs|
+|#0300 - #84FF|Memory for source code|
+|#8500 - #8EFF|Buffer for disk/cass I/O|
 |#8D00 - #A6D0|Pegasus|
 
 
