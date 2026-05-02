@@ -157,7 +157,7 @@ enert@: CALL incaz
 enert1: LD   HL,(mazei)
         INC  HL
         LD   (mazei),HL
-        LD   BC,0´
+        LD   BC,0
         LD   HL,lowbuf
         AND  A
         RET
@@ -178,8 +178,8 @@ entert: LD   A,(wflag)
         INC  HL
         PUSH DE
         LD   D,H
-        LD   D,L
-        CALL c'labi
+        LD   E,L
+        CALL c_labi
         POP  DE
         JR   C,entee1
 enter2: LD   HL,bbuff
@@ -314,7 +314,7 @@ inset2: LD   C,(HL)
         LD   HL,ciibuf
         LD   BC,80
         LDIR
- t4:    LD   A,(curxp)
+        LD   A,(curxp)
         PUSH AF
         CALL linout
  curle5:LD   A,18
@@ -342,19 +342,19 @@ inset2: LD   C,(HL)
         CALL searz
         LD   A,10
         JR   cuupu
-c're:   LD   A,C
+c_re:   LD   A,C
         SUB  B
         LD   D,0
         LD   E,A
         ADD  HL,DE
         LD   B,C
-c'rek:  LD   A,B
-t4:     LD   (curxp),A
+c_rek:  LD   A,B
+        LD   (curxp),A
         AND  A
         RET
-c'le:   LD   HL,lowbuf
+c_le:   LD   HL,lowbuf
         LD   B,0
-        JR   c'rek
+        JR   c_rek
 clin:   PUSH HL
         CALL ak=ma_
         POP  HL
@@ -910,7 +910,7 @@ ctrlk1: CALL inske3
         INC  HL   
         LD   (mazei),HL
         JP   bctoed
-c'lab:  LD   HL,labn_
+c_lab:  LD   HL,labn_
         CALL savlu3
         PUSH HL
         DEC  B
@@ -919,46 +919,46 @@ c'lab:  LD   HL,labn_
         ADD  HL,BC
         SET  7,(HL)   
         POP  DE
-        CALL c'labi
+        CALL c_labi
         JR   NC,c1
         LD   HL,(aszei)
 c2:     LD   (akzei),HL
 c1:     JP   bctoed
-c'labi: LD   HL,0
+c_labi: LD   HL,0
         LD   (aszei),HL
         LD   HL,(pranf)
-c'w9:   PUSH HL
+c_w9:   PUSH HL
         LD   A,(HL)
         INC  HL
         OR   (HL)
-        JR   Z,c'end
+        JR   Z,c_end
         LD   A,(HL)
         INC  HL
         CP   192
-        JR   NZ,c'w8
+        JR   NZ,c_w8
         PUSH HL
         PUSH DE
-c'w0:   LD   A,(DE)
+c_w0:   LD   A,(DE)
         CP   (HL)
-        JR   NZ,c'w1
+        JR   NZ,c_w1
         RLCA
-        JR   C,c'w2
-c'w3:   INC  DE
+        JR   C,c_w2
+c_w3:   INC  DE
         INC  HL
-        JR   c'w0
-c'w1:   POP  DE
+        JR   c_w0
+c_w1:   POP  DE
         POP  HL
-c'w8:   LD   HL,(aszei)
+c_w8:   LD   HL,(aszei)
         INC  HL
         LD   (aszei),HL
         POP  HL
         LD   B,0
         LD   C,(HL)
         ADD  HL,BC
-        JR   c'w9
-c'end:  POP  HL
+        JR   c_w9
+c_end:  POP  HL
         RET
-c'w2:   POP  DE
+c_w2:   POP  DE
         POP  HL
         POP  HL
         LD   BC,(prakt)
@@ -971,10 +971,10 @@ c'w2:   POP  DE
         SCF
         RET  NZ
         PUSH HL
-        JR   c'w8
-c'up:   LD   HL,0
+        JR   c_w8
+c_up:   LD   HL,0
         JR   c2
-c'down: LD   HL,(mazei)
+c_down: LD   HL,(mazei)
         JR   c2
 new:    LD   HL,lotab
         CALL yes_no
@@ -1194,9 +1194,9 @@ keytab: DEFB 240
         DEFB 243
         DEFW curre
         DEFB 251
-        DEFW c're
+        DEFW c_re
         DEFB 250
-        DEFW c'le
+        DEFW c_le
         DEFB 11
         DEFW ctrl.k
         DEFB 224
@@ -1224,11 +1224,11 @@ keytab: DEFB 240
         DEFB 30
         DEFW go
         DEFB 6
-        DEFW c'lab
+        DEFW c_lab
         DEFB 248
-        DEFW c'up
+        DEFW c_up
         DEFB 249
-        DEFW c'down
+        DEFW c_down
         DEFB #FF
 ;MATHTAB
 mathta: DEFW plus
@@ -1301,7 +1301,6 @@ inf_:   DEFM "Anfang: "
         DEFB 0
 mazei:  DEFW 0
 akzei   DEFW 0
-pranf:  DEFW 0
 pranf:  DEFW 0
 prend:  DEFW 0
 prakt:  DEFW 0
@@ -1724,9 +1723,7 @@ addw2:  LD   A,C
         ADD  9
         LD   A,B
         JP   bpuku2
-;LD-BEFEHLE
-26.01.88
-;
+;LD-BEFEHLE 26.01.88
 bld:    LD   A,B
         CALL reg16t
         JR   C,lku1
@@ -2251,7 +2248,7 @@ labmai: LD   (IX+#FE),E
         LD   (IX+#FD),D
         XOR  A
         LD   (IX+#FC),A
-        LD   (IX##FB),A
+        LD   (IX+#FB),A
         PUSH HL
         PUSH IX
         POP  HL
