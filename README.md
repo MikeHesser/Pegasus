@@ -21,7 +21,7 @@ Pegasus is a 2-pass assembler with the following features:
 * very fast assembler (6 KByte in 13 sec.)
 * generates code for any memory address
 * simple integer arithmetic
-* Start generated programs from Pegasus and display registers by pseudo command 'BRK
+* Start generated programs from Pegasus and display registers by pseudo command `BRK`
 
 
 ### The Editor
@@ -43,8 +43,8 @@ Here are the editor functions:
 | `CTRL + F` | Jump to a label: After entering the searched label, the cursor will be placed on the line of the label, if it exists in the source text.            |
 | `CTRL + C` | Deletes the line at cursor position. The following lines are moved up.           |
 | `COPY` | This key can be used to narrow down text areas. To do this, move the cursor to the beginning of the area and press the COPY key, which is acknowledged with a sound signal. Now the end is marked in the same way. During marking, no changes can be made to the source text! If you want to return from the block mode to the editing mode, the ESC key must be pressed.           |
-| 'ENTER' | Input confirmation of the entered line. The command is output formatted on the screen. The cursor also moves to the beginning of the next line. If you want to insert a line, the cursor must be moved to the beginning of the line and ENTER must be pressed. |
-| 'CTRL + K' (Copy block). This key combination copies the block previously marked with the COPY key to the current cursor position. |
+| `ENTER` | Input confirmation of the entered line. The command is output formatted on the screen. The cursor also moves to the beginning of the next line. If you want to insert a line, move the cursor to the beginning of the line and press ENTER. |
+| `CTRL + K` | (Copy block). Copies the block previously marked with the COPY key to the current cursor position. |
 | `CTRL + N` | This function deletes the entire source text after a confirmation prompt. If a block was marked before, it will be deleted. |
 | `CTRL + ^` | With this option you can start the assembled program. However, no changes should be made to the source code between assembling and starting the program, otherwise the machine code could be overwritten.
 | `CTRL + S` | The program asks for the file name and then saves the source code. For cassette users: default is 2000 baud |
@@ -53,15 +53,11 @@ Here are the editor functions:
 
 ### THE ASSEMBLER PART
 
-It is called from the editor with `CTRL + A`. The screen is cleared and the following questions appear on the screen in order:</p>
+It is called from the editor with `CTRL + A`. The screen is cleared and the following questions appear on the screen in order:
 
 #### Screen output (y/n)? 
  
-While assembling, the lines are also displayed.
-During the assembling process the lines are also displayed.
-The listing of the line can be stopped by ESC, and continued by
-and continue by pressing any key. Pressing the
-Pressing the ESC key again cancels the process.
+While assembling, the source lines are displayed on screen. The listing can be paused with ESC and resumed by pressing any key. Pressing ESC again cancels the process.
 
 #### Printer (y/n)? 
 
@@ -80,36 +76,34 @@ Here are the meanings of the individual messages:
 | ------------------ | ------------- |
 |`Syntax error` | Pegasus does not understand the line. e.g. there is no `LD HL,DE.`|
 |`Overflow` | A value or the result of an operation is too large. (e.g. `LD A,500` or `LD A,200+200`) |
-|`Memory full` | Es ist nicht mehr genügend Speicherplatz für den Objektcode oder für die Labeltabelle vorhanden |
-|`Distance too high` | Die Distanz zweier Adressen ist für eine relative Adressierung zu groß| 
-|`Out of Memory` | Die angegebene ORG-Adresse ist über oder unter dem zulässigen Speicherbereich.|
-|`Unknown Label` | Das Label ist nicht im Quelltext definiert|
+|`Memory full` | There is not enough memory for the object code or the label table |
+|`Distance too high` | The distance between two addresses is too large for relative addressing |
+|`Out of Memory` | The specified ORG address is above or below the permitted memory range |
+|`Unknown Label` | The label is not defined in the source code |
 
-## Argumente
+## Arguments
 
 ### Labels
 
-Labels dürfen maximal 6 Zeichen lang sein und müssen mit einem Buchstaben beginnen. Weiterhin muß ein Doppelpunkt angehängt werden.
-Labels können auf folgende Arten definiert werden:
+Labels may be at most 6 characters long and must start with a letter. A colon must be appended.
+Labels can be defined in the following ways:
 
-|Syntax|Beschreibung|
+| Syntax | Description |
 | -------------------- | ------------- |
-|`<label>: EQU <wert>` | <label> nimmt den Wert <wert> an|
-|`<label>: <Befehl>` | <label> nimmt den Wert des aktuellen Programcounters (PC) an.|
+|`<label>: EQU <value>` | `<label>` takes the value `<value>` |
+|`<label>: <command>` | `<label>` takes the value of the current program counter (PC) |
 
-### Der Assembler
+### The Assembler
 
-#### Zahlen
+#### Numbers
 
-Bei Hexadzimalzahlen muß ein Doppelkreuz `#` und bei Binärzahlen ein Prozentzeichen `%` vorangestellt werden.
+Hexadecimal numbers must be prefixed with `#` and binary numbers with `%`.
 
-
-z.B.
-|Wert|Bedeutung|
+| Value | Meaning |
 | ----- | ------------- |
-|`ABCD` |hexadecimal|
-|`%1010`|Binary|
-|`1234` |Decimal|
+|`#ABCD` | hexadecimal |
+|`%1010` | binary |
+|`1234` | decimal |
 
 #### Strings
 
@@ -133,7 +127,7 @@ The above arguments can be linked using the following operators:
 |-|Subtraction|
 |*|Multiplication|
 |/|Division|
-|OR|
+|?|OR|
 |&|AND|
 |!|XOR|
 
