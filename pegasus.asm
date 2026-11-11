@@ -223,7 +223,7 @@ insert: PUSH BC
 ins_1:  LD   HL,(prakt)
         LD   D,(HL)
         LD   A,D
-        SUB  X
+        SUB  C
         JR   Z,inske
         JR   NC,inset3
         LD   A,C
@@ -1300,7 +1300,7 @@ inf_:   DEFM "Anfang: "
         DEFM "    Start: "
         DEFB 0
 mazei:  DEFW 0
-akzei   DEFW 0
+akzei:  DEFW 0
 pranf:  DEFW 0
 prend:  DEFW 0
 prakt:  DEFW 0
@@ -1329,7 +1329,7 @@ copz4:  DEFW 0
 ;ASSEMBLER
 ;
 ass:    LD   A,(HL)
-        INC  (HL)
+        INC  HL
         CP   2
         CCF
         RET  NC
@@ -1358,7 +1358,7 @@ l1:     CALL elemew
 				LD   A,(HL)
 				CP   10
 				JR   NZ,l1
-				INC  (HL)
+				INC  HL
 				LD   D,H
 				LD   E,L
 				LD   A,C
@@ -1834,11 +1834,11 @@ lds1:   CP   52
 lds2:   CP   39
         JR   NZ,lds3
         LD   C,#4F
-        JR   ldk1
+        JR   ldk1b
 lds3:   CP   38
         JR   NZ,lds4
         LD   C,#47
-ldk1:   CALL wred
+ldk1b:  CALL wred
         LD   A,C
         JP   wrbuf
 lds4:   CALL xyte
@@ -1856,11 +1856,11 @@ lds5:   CP   52
 lds6:   CP   39
         JR   NZ,lds7
         LD   C,#5F
-        JR   ldk2
+        JR   ldk2b
 lds7:   CP   38
         JR   NZ,lds8
         LD   C,#57
-ldk2:   CALL wred
+ldk2b:  CALL wred
         LD   A,C
         JP   wrbuf
 lds8:   CALL xyte
@@ -1912,7 +1912,7 @@ ld.y^:  INC  HL
         LD   A,C
         ADD  #52
         JP   i1b
-ld.^y   EX   DE,HL
+ld.^y: EX   DE,HL
         CALL ixiyte
         RET  C
         LD   A,B
@@ -2265,7 +2265,7 @@ labmai: LD   (IX+#FE),E
         INC  HL
         LD   (freeme),HL
         POP  HL
-        JP   aa
+        JP   ass
 plus:   AND  A
         ADD  HL,DE
         RET
@@ -2477,7 +2477,7 @@ st_>in: CP   59
         CALL arg.ho    
 stw@1:  LD   A,B
         LD   (arg1bf),A
-        JP   psts
+        JP   pstst
 weit'3: CALL fintst
         JP   Z,noarg
         CALL arg.h2
@@ -2586,7 +2586,7 @@ zah'2:  LD   (IY),E
 texti:  LD   A,9
 textil: CALL wrbuf2
         LD   A,(HL)
-        INC  (HL)
+        INC  HL
         OR   A
         RET  Z
         CP   34
@@ -2644,7 +2644,7 @@ remo:   CALL wrbuf2
         LD   A,(HL)
         OR   A
         RET  Z
-        JR   remlo
+        JR   remo
 pstst:  LD   DE,pseudo
         LD   C,B
         PUSH HL
@@ -2731,9 +2731,10 @@ wrbuf2: LD   (IY),A
 ;
 arg.h2: LD   DE,arg.z2
         JR   argho2
-arg.g1: LD   DE,arg.z1
+arg.h1: LD   DE,arg.z1
         JR   argho2
-arg.ho: LD   B,0
+arg.ho: LD   DE,arg.z
+argho2: LD   B,0
 argl#1: LD   A,(HL)
         OR   A
         RET  Z
@@ -3059,7 +3060,7 @@ zsuen:  LD   A,(DE)
         CALL wrbuf2
         JR   zsuen
 weire:  LD   A,(DE)
-        INC  (DE)
+        INC  DE
         CP   32
         RET  Z
         JR   weire        
@@ -3074,7 +3075,7 @@ kl_tok: DEFM "B C D E H L (HL) A I R BC DE HL SP AF IX IY "
 pseudo: DEFM "ORG DEFB DEFW DEFS DEFM BRK ENT END EQU "
         DEFB 0
 ag0:    DEFM "RET NOP RLA RRA DAA CPL CCF SCF EXX HALT DI RLCA EI RRCA "
-ag0':   DEFM "NEG RRD RLD LDI LDD INI IND CPU CPD IM0 IM1 IM2 RETN RETI "
+ag0':   DEFM "NEG RRD RLD LDI LDD INI IND CPI CPD IM0 IM1 IM2 RETN RETI "
         DEFM "OUTI OUTD LDIR LDDR CPIR CPDR INIR INDR OTIR OTDR "
         DEFB 0
 ag1:    DEFM "ADD ADC SUB SBC AND XOR OR CP RLC RRC RL RR SLA SRA SLL "
