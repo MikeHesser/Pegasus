@@ -1302,6 +1302,7 @@ inf_:   DEFM "Anfang: "
 mazei:  DEFW 0
 akzei:  DEFW 0
 pranf:  DEFW 0
+        DEFW 0                  ; unused word (present in the original binary)
 prend:  DEFW 0
 prakt:  DEFW 0
 pren2:  DEFW 0
@@ -1721,6 +1722,7 @@ addw2:  LD   A,C
         ADD  A
         ADD  A
         ADD  9
+        LD   C,A
         LD   A,B
         JP   bpuku2
 ;LD-BEFEHLE 26.01.88
@@ -3055,6 +3057,7 @@ zsu1:   LD   A,B
         INC  C
         JR   zsu1
 zsuen:  LD   A,(DE)
+        INC  DE
         CP   32
         RET  Z
         CALL wrbuf2
